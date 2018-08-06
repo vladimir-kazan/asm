@@ -1,0 +1,5 @@
+.DS_Store
+*.o
+
+# compiled apps
+src/01_hello_world/hello
