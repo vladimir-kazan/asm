@@ -3,3 +3,4 @@
 
 # compiled apps
 src/01_hello_world/hello
+src/02_register_output/print_reg
