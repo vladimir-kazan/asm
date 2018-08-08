@@ -11,6 +11,7 @@
         %define     SYS_EXIT        0x2000001
 %endif
 
+default rel
 global start
 
         section     .data
@@ -52,17 +53,30 @@ exit:
 start:
 
         mov         rax, 0x1122334455667788
-        mov         rdi, 1  ; arg #1
-        mov         rdx, 1  ; data
-        mov         rcx, 12 ; counter
+        ; mov         rdi, 1  ; arg #1, output
+        mov         rdx, 1  ; data, string length
+        mov         rcx, 64 ; counter
 
 .loop:
+        push        rax
         sub         rcx, 4
+        sar         rax, cl
+        and         rax, 0xf
 
-        mov         rdi, codes          ; 1st
-        mov         rsi, codes.len      ; 2nd
-        call        write
+        ; lea         rdi, [codes + rax]
+        mov         rdi, codes
+        add         rdi, rax
+        mov         rsi, 1
+
+        call        write           ; rdi - for data, rsi - for length
+        pop rax
         test        rcx, rcx       ; test if zero
         jnz .loop
 
+        mov         rdi, 0xa        ; print endline
+        push        rdi
+        mov         rdi, rsp        ; get address from stack
+        mov         rsi, 1
+        call        write
+        pop         rdi
         call        exit

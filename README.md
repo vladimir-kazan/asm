@@ -83,6 +83,15 @@ https://www.csee.umbc.edu/portal/help/nasm/nasm.shtml
 
 `brew install gdb`
 
+```sh
+# v8.0.1
+brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/c3128a5c335bd2fa75ffba9d721e9910134e4644/Formula/gdb.rb
+
+brew pin gdb # stop updating
+
+codesign -fs gdbcert /usr/local/bin/gdb
+```
+
 The purpose for creating a certificate was to codesign gdb on Mac. Here are the steps:
 - Name of Certificate = gdbcert
 - Identity Type = Self Signed Root
