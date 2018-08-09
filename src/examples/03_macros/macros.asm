@@ -34,7 +34,7 @@ global  start
 
 start:
     printString message, message.len
-    printChar 0x21      ; "!"" char
+    printChar 0x21      ; "!" char
     printChar 0xA
     exit 0
 

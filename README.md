@@ -1,6 +1,7 @@
 # asm
 Assembly x64 playground
 http://asmtutor.com
+https://cs.brown.edu/courses/cs033/docs/guides/x64_cheatsheet.pdf
 
 http://cs.lmu.edu/~ray/notes/nasmtutorial/
 
@@ -10,7 +11,7 @@ https://software.intel.com/en-us/articles/introduction-to-x64-assembly
 
 ## Tools
 
-1. NASM — compiler
+1. NASM — compiler, https://www.nasm.us/xdoc/2.13.03/nasmdoc.pdf
 ```sh
 brew install nasm
 ```
@@ -215,3 +216,9 @@ printf '%x\n' 42
 echo $(([##16]$num)) # with zsh
 ```
 
+```sh
+
+-~~..~:#;L .-:#;L,.- .~:#:;.T -~~.~:;..~:;.
+E8+U *T +U’ *T# .97 *L E8+’ *;T’ *;, D97 ‘*L .97 ’*L "T;E+:, D9 *L *L H7 I#T7 I# "*:.H7I#I# U: :8*#+,:8T,79U::8:8
+,#B. .IE, "T;E* .IE,J*+;#:T*" ,#B. .IE, .IE,
+```
