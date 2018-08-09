@@ -11,7 +11,7 @@
         %define     SYS_EXIT        0x2000001
 %endif
 
-default rel
+; default rel
 global start
 
         section     .data
@@ -73,7 +73,7 @@ start:
         test        rcx, rcx       ; test if zero
         jnz .loop
 
-        mov         rdi, 0xa        ; print endline
+        mov         rdi, 0xA        ; print endline
         push        rdi
         mov         rdi, rsp        ; get address from stack
         mov         rsi, 1

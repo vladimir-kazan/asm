@@ -63,14 +63,18 @@ Others
 
 Register|Usage|Preserved across calls
 ---|---|---
-%rax (r0)|temporary register; with variable arguments passes information about the number of vector registers used; 1st return register|No
+%rax (r0)|temporary register; with variable arguments passes information about the number of vector registers used; **1st return** register|No
+%rbx (r3)|callee-saved register|Yes
 %rcx (r1)|used to pass **4th** integer argument to functions|No
-%rdx (r2)|used to pass **3rd** argument to functions; 2nd return register|No
-%rbx (r3)||
-%rsp (r4)||
-%rbp (r5)||
+%rdx (r2)|used to pass **3rd** argument to functions; **2nd return register**|No
+%rsp (r4)|stack pointer|Yes
+%rbp (r5)|callee-saved register, optionally used as frame pointer|Yes
 %rsi (r6)|used to pass **2st** argument to functions|No
 %rdi (r7)|used to pass **1st** argument to functions|No
+%r8|used to pass **5th** argument to functions|No
+%r9|used to pass **6th** argument to functions|No
+%r10|temporary register, used for passing a function’s static chain pointer|No
+%r11|temporary register|No
 
 # Debugging
 
