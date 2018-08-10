@@ -6,20 +6,25 @@ SECTION .text
 global  start
 
 start:
-    mov     rdi, strings
-    call    sprint
-    mov     rdi, 21h
-    call    printChar
-    mov     rdi, 0Ah
-    call    printChar
+    ; mov     rdi, string1
+    ; call    sprint
+    ; mov     rdi, 21h
+    ; call    printChar
+    ; mov     rdi, 0Ah
+    ; call    printChar
 
-    mov     rdi, strings
+    mov     rdi, smile
+    call    sprintLF
+
+    mov     rdi, string_demo
     call    sprintLF
 
     mov     rdi, 0h
     call    exit
 
 
-
 SECTION .data
-strings:     db  "Strings", 0h
+smile: db `\u263a`,0h
+string1:     db  "Strings",0h
+string_demo:     db  "Demo",0h
+

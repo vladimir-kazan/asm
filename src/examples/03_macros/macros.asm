@@ -9,8 +9,8 @@
 %macro printString 2
     mov     rax, SYS_WRITE
     mov     rdi, 1              ; stdout
-    ; lea     rsi, [%1]         ; with "default rel" on top if error on mac
-    mov     rsi, %1             ; string
+    lea     rsi, [rel %1]         ; or with "default rel" on top if error on mac
+    ; mov     rsi, %1             ; string
     mov     rdx, %2             ; length
     syscall
 %endmacro
@@ -31,13 +31,17 @@
 
 SECTION .text
 global  start
+default rel
 
 start:
     printString message, message.len
+    printString message2, message2.len
     printChar 0x21      ; "!" char
     printChar 0xA
     exit 0
 
 SECTION .data
-message:    db  "Hello world with macros"
+message:    db  "Hello world with macros", 0Ah
 .len:       equ $ - message
+message2:    db  "just hello"
+.len:       equ $ - message2

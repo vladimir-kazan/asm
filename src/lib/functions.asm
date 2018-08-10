@@ -65,6 +65,17 @@ sprintLF:
     ret
 
 ;------------------------------------------
+; void input(char *buf, size_t count)
+; Read data from console
+sinput:
+    mov     rax, SYS_READ
+    mov     rdx, rsi            ; 3rd, size
+    mov     rsi, rdi            ; 2nd, address to put input
+    mov     rdi, 0x0            ; 1st, fd for input
+    syscall
+    ret
+
+;------------------------------------------
 ; void exit()
 ; Exit program and restore resources
 ;

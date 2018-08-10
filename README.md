@@ -31,10 +31,10 @@ echo $?
 
 ## syscall
 
-http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/
+Linux — http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/
 https://github.com/torvalds/linux/blob/master/arch/x86/entry/syscalls/syscall_64.tbl
+Mac — https://opensource.apple.com/source/xnu/xnu-1504.3.12/bsd/kern/syscalls.master
 
-https://opensource.apple.com/source/xnu/xnu-1504.3.12/bsd/kern/syscalls.master
 
 ```c
 1	AUE_EXIT	ALL	{ void exit(int rval); }
