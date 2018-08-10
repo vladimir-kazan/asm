@@ -17,7 +17,7 @@ start:
     call    sprintLF
 
     mov     rdi, 0h
-    call    quit
+    call    exit
 
 
 

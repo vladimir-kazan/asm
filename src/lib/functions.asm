@@ -69,7 +69,7 @@ sprintLF:
 ; Exit program and restore resources
 ;
 ; rdi - 1st argument, exit code
-quit:
+exit:
     mov     rax, SYS_EXIT
     syscall
     ret
