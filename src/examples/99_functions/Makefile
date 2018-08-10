@@ -24,8 +24,8 @@ endif
 
 $(TARGET): $(TARGET).o
 	@echo "\nLinking..."
-	$(LD) -o $@ $^
-	@echo "\nOutput: $@"
+	$(LD) -o $@_app $^
+	@echo "\nOutput: $@_app"
 
 %.o: %.asm
 	@echo "\nCompiling..."
@@ -33,6 +33,11 @@ $(TARGET): $(TARGET).o
 
 clean:
 	@echo "\nCleaning..."
-	rm -f $(TARGET) *.o
+	rm -f *_app *.o
 
-.PHONY: clean before
+run:
+	./$(TARGET)_app $(filter-out $@,$(MAKECMDGOALS))
+%:
+	@:
+
+.PHONY: clean before run

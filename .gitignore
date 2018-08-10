@@ -2,8 +2,4 @@
 *.o
 
 # compiled apps
-src/examples/01_hello_world/hello
-src/examples/02_register_output/print_reg
-src/examples/03_macros/macros
-src/examples/04_arguments/arguments
-src/examples/99_functions/functions
+src/**/*_app

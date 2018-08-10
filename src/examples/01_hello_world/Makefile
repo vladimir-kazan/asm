@@ -7,8 +7,8 @@ ifeq ($(UNAME), Darwin)
 	ASFLAGS = -f macho64 -F dwarf -g
 	LD = ld -macosx_version_min 10.7.0 -lSystem -e start
 else ifeq ($(UNAME), Linux)
-	ASFLAGS = -f elf64 -F dwarf -g -e start
-	LD = ld
+	ASFLAGS = -f elf64 -F dwarf -g
+	LD = ld -e start
 else
 	ERROR := ERROR: Platform "$(UNAME)" is not supported
 endif
@@ -24,8 +24,8 @@ endif
 
 $(TARGET): $(TARGET).o
 	@echo "\nLinking..."
-	$(LD) -o $@ $^
-	@echo "\nOutput: $@"
+	$(LD) -o $@_app $^
+	@echo "\nOutput: $@_app"
 
 %.o: %.asm
 	@echo "\nCompiling..."
@@ -33,6 +33,11 @@ $(TARGET): $(TARGET).o
 
 clean:
 	@echo "\nCleaning..."
-	rm -f $(TARGET) *.o
+	rm -f *_app *.o
 
-.PHONY: clean before
+run:
+	./$(TARGET)_app $(filter-out $@,$(MAKECMDGOALS))
+%:
+	@:
+
+.PHONY: clean before run
