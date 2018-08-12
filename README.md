@@ -9,6 +9,10 @@ https://www.nasm.us/doc/nasmdoc0.html
 
 https://software.intel.com/en-us/articles/introduction-to-x64-assembly
 
+https://www.tutorialspoint.com/assembly_programming/assembly_arithmetic_instructions.htm
+
+https://software.intel.com/en-us/articles/intel-sdm
+
 ## Tools
 
 1. NASM — compiler, https://www.nasm.us/xdoc/2.13.03/nasmdoc.pdf
