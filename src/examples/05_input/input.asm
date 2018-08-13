@@ -1,5 +1,5 @@
 
-%include '../../lib/syscall_constants.asm'
+%include '../../lib/syscall.asm'
 %include '../../lib/functions.asm'
 
 SECTION .text

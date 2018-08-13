@@ -1,4 +1,4 @@
-; %include './syscall_constants.asm'
+; %include './syscall.asm'
 
 ;------------------------------------------
 ; int strlen(String message)
@@ -74,6 +74,35 @@ sinput:
     mov     rdi, 0x0            ; 1st, fd for input
     syscall
     ret
+
+;------------------------------------------
+; void iprint(Integer number)
+; Integer printing (itoa)
+; num in rdi - 1st argument
+iprint:
+    mov     rcx, 0          ; num counter
+    mov     rax, rdi
+.divideLoop:
+    inc     rcx
+    mov     rdx, 0          ; empty remainder
+    mov     rsi, 0Ah
+    idiv    rsi
+    add     rdx, 30h        ; 48 or 30h or '0'
+    push    rdx
+    cmp     rax, 0
+    jnz     .divideLoop
+.printLoop:
+    dec     rcx
+    mov     rdi, rsp
+    push    rcx
+    call    sprint
+    pop     rcx
+    pop     rdi
+    cmp     rcx, 0
+    jnz     .printLoop
+    ret
+
+
 
 ;------------------------------------------
 ; void exit()
