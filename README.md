@@ -2,6 +2,7 @@
 Assembly x64 playground
 http://asmtutor.com
 https://cs.brown.edu/courses/cs033/docs/guides/x64_cheatsheet.pdf
+http://www.cs.smith.edu/~jfrankli/231f13/231/doc/pcasm-book.pdf
 
 http://cs.lmu.edu/~ray/notes/nasmtutorial/
 
@@ -44,42 +45,6 @@ Mac — https://opensource.apple.com/source/xnu/xnu-1504.3.12/bsd/kern/syscalls.
 1	AUE_EXIT	ALL	{ void exit(int rval); }
 4	AUE_NULL	ALL	{ user_ssize_t write(int fd, user_addr_t cbuf, user_size_t nbyte); }
 ```
-
-## registers
-
-- rax, accumulator
-- rbx, base, addressing
-- rcx, counter, loops
-- rdx, data, input/output
-
-https://www.uclibc.org/docs/psABI-x86_64.pdf
-
-decomposition
-- rax = r0
-- eax = r0d — double word, lower 32 bits
-- ax = r0w — word, lower 16 bits
-- ah + al = r0b — byte, lower 8 bits
-
-Others
-- rsi (64) -> esi (32) -> si (16) -> sil (8)
-- rdi (64) -> edi (32) -> di (16) -> dil (8)
-- rsp (64) -> esp (32) -> sp (16) -> spl (8)
-- rbp (64) -> ebp (32) -> bp (16) -> bpl (8)
-
-Register|Usage|Preserved across calls
----|---|---
-%rax (r0)|temporary register; with variable arguments passes information about the number of vector registers used; **1st return** register|No
-%rbx (r3)|callee-saved register|Yes
-%rcx (r1)|used to pass **4th** integer argument to functions|No
-%rdx (r2)|used to pass **3rd** argument to functions; **2nd return register**|No
-%rsp (r4)|stack pointer|Yes
-%rbp (r5)|callee-saved register, optionally used as frame pointer|Yes
-%rsi (r6)|used to pass **2st** argument to functions|No
-%rdi (r7)|used to pass **1st** argument to functions|No
-%r8|used to pass **5th** argument to functions|No
-%r9|used to pass **6th** argument to functions|No
-%r10|temporary register, used for passing a function’s static chain pointer|No
-%r11|temporary register|No
 
 # Debugging
 
