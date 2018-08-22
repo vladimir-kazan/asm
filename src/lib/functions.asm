@@ -82,11 +82,23 @@ sinput:
 iprint:
     mov     rcx, 0          ; num counter
     mov     rax, rdi
+; if positive
+    cmp     rax, 0x0
+    jnl     .divideLoop
+; else
+    neg     rax
+    mov     rdi, 45
+    push    rax
+    push    rcx
+    call    printChar
+    pop     rcx
+    pop     rax
+
 .divideLoop:
     inc     rcx
     mov     rdx, 0          ; empty remainder
     mov     rsi, 0Ah
-    idiv    rsi
+    div     rsi
     add     rdx, 30h        ; 48 or 30h or '0'
     push    rdx
     cmp     rax, 0
@@ -111,34 +123,59 @@ iprint:
 ; return rax
 atoi:
     push    rbx
+    mov     rcx, 0          ; init counter
+
+; check first char
+    xor     rbx, rbx        ; set 0
+    mov     bl, [rdi + rcx] ; current char in rbx
+    ; if char is minus
+    mov     rax, 1
+    cmp     bl, 45          ; '-'
+    jne     .begin
+    mov     rax, -1
+    inc     rcx
+
+.begin:
+    push    rax
     mov     rax, 0          ; initialise rax with decimal value 0
-    mov     rcx, 0          ; counter
-    ; '-' code is 45
+
 .multiplyLoop:
     xor     rbx, rbx        ; set 0
-    mov     bl, [rdi+rcx]   ; rbx
-    cmp     bl, 48          ; ascii value 48 (char value 0)
-    jl      .finished       ; jump if less than to label finished
-    cmp     bl, 57          ; compare ebx register's lower half value against ascii value 57 (char value 9)
-    jg      .finished       ; jump if greater than to label finished
+    mov     bl, [rdi + rcx] ; current char in rbx
+; if char is minus
+    cmp     bl, 45          ; '-' code is 45
+    jne     .notNegative
+    ; mov     rax, 0xa
+    inc     rcx
+    jmp     .multiplyLoop
+
+.notNegative:
+; if end of string
     cmp     bl, 10          ; compare ebx register's lower half value against ascii value 10 (linefeed character)
     je      .finished       ; jump if equal to label finished
     cmp     bl, 0           ; compare ebx register's lower half value against decimal value 0 (end of string)
     jz      .finished       ; jump if zero to label finished
+; if char is number
+    cmp     bl, 48          ; ascii value 48 (char value 0)
+    jge      .processNumber ; jump if less than to label finished
+    cmp     bl, 57          ; compare ebx register's lower half value against ascii value 57 (char value 9)
+    jle      .processNumber ; jump if greater than to label finished
+
+.processNumber:
     sub     bl, 48
-    add     rax, rbx        ; j
+    add     rax, rbx
     mov     rbx, 10
     mul     rbx
     inc     rcx
     jmp     .multiplyLoop
-    ;jmp     .finished
 .finished:
+    xor     rdx, rdx        ; otherwise wrong result in linux
     mov     rbx, 10
-    div     rbx         ; rax
+    div     rbx             ; rax/rbx
     pop     rbx
+    mul     rbx             ; 1 or -1
+    pop     rbx             ; restore initial value
     ret
-
-
 
 ;------------------------------------------
 ; void exit()

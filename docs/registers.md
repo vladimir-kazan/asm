@@ -60,6 +60,10 @@ Register|Usage|Preserved across calls
 %r10|temporary register, used for passing a function’s static chain pointer|No
 %r11|temporary register|No
 
+## Flags
+
+https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow
+
 ## Links
 
 https://www.uclibc.org/docs/psABI-x86_64.pdf
